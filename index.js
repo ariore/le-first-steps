@@ -1,22 +1,23 @@
 const express = require("express");
 const bodyParser = require('body-parser');
-const app = express();
+const server = express();
 const shell = require('shelljs');
+//const port = require('./port')
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.json());
 
-app.get('/', function (req, res) {
+server.get('/', function (req, res) {
   res.send('we are the world, we are the people, it works!');
 });
 
 // routes will go here
-app.get('/test', function(req, res) {
+server.get('/test', function(req, res) {
   var trigger = req.param('trigger');
   res.send(trigger);
 });
 
-app.post('/test', function (req, res) {
+server.post('/test', function (req, res) {
  var trigger = req.body.trigger;
   if(trigger == 1)
 {
@@ -25,8 +26,4 @@ app.post('/test', function (req, res) {
  res.send(req.body.trigger+"deberias funcar");
 });
 
-app.listen(3000, () => {
- console.log("Server is working on port 3000");
-});
-
-module.exports=app;
+module.exports=server;
